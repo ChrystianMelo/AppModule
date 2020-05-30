@@ -1,0 +1,2 @@
+rootProject.name='AppModule'
+include ':app'
