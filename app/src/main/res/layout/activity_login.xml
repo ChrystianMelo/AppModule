@@ -7,107 +7,18 @@
     tools:context=".LoginActivity"
     android:background="@color/colorPrimaryDark">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="MissingConstraints,ScrollViewCount"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_marginLeft="@android:dimen/notification_large_icon_height"
-        android:layout_marginRight="@android:dimen/notification_large_icon_width"
-        android:layout_marginStart="@android:dimen/notification_large_icon_height"
-        android:layout_marginEnd="@android:dimen/notification_large_icon_width"
-        >
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_account_mailLayout"
-            android:hint="@string/mail"
-            android:textColorHint="@color/design_default_color_on_primary"
-            android:textSize="14sp"
-            app:startIconDrawable="@drawable/ic_user"
-            app:startIconTint="@color/design_default_color_on_primary"
-            android:inputType="textEmailAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusableInTouchMode="true"
-            android:fontFamily="@font/roboto_thin"
-            app:errorEnabled="true"
-            >
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tiet_account_mail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_thin"
-                android:inputType="textEmailAddress"
-                android:textColor="@color/design_default_color_on_primary"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id = "@+id/til_account_passLayout"
-            android:hint = "@string/tilPass"
-            android:textColorHint="@color/design_default_color_on_primary"
-            android:textSize="14sp"
-            app:startIconDrawable="@drawable/ic_pass"
-            app:startIconTint="@color/design_default_color_on_primary"
-            app:endIconMode="password_toggle"
-            app:endIconTint="@color/design_default_color_on_primary"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_thin"
-            app:errorEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tiet_account_pass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_thin"
-                android:inputType="textPassword"
-                android:textColor="@color/design_default_color_on_primary"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/btn_account_login"
-            android:text="@string/btnLogin"
-            android:layout_width="@android:dimen/thumbnail_height"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_launcher_button"
-            android:textColor="@color/design_default_color_on_primary"
-            android:fontFamily="@font/roboto_thin"
-            android:textSize="24sp"
-            />
-
-        <TextView
-            android:id="@+id/txt_account_forgotten"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/abhaya_libre_semibold"
-            android:onClick="Recover"
-            android:text="@string/txtForgot"
-            android:textColor="@color/design_default_color_on_primary"
-            android:textSize="15sp" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        tools:ignore="MissingConstraints,ScrollViewCount"
-        android:gravity="bottom|center_horizontal"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/txt_account_create"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/abhaya_libre_semibold"
-            android:onClick="Create"
-            android:text="@string/txtNewAcc"
-            android:textColor="@color/design_default_color_on_primary"
-            android:textSize="15sp" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/login_btn_next"
+        android:text="@string/next"
+        android:layout_width="@android:dimen/thumbnail_height"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/design_default_color_on_primary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="24sp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
