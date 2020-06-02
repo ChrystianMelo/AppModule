@@ -67,15 +67,14 @@ public class CreateAccActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void addInfo(){
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    public void updateUI(FirebaseUser user){
 
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(getName())
                 .setPhotoUri(Uri.parse("https://lh3.googleusercontent.com/-Mj_p8uemhx0/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucmtfvnixYvFPtRbroJwRGa3TTOLyg/photo.jpg"))
                 .build();
 
-        user.updateProfile(profileUpdates)
+        Objects.requireNonNull(user).updateProfile(profileUpdates)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -99,6 +98,7 @@ public class CreateAccActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     void setOnDB(){
+        final Intent intent = new Intent(this, ProfileActivity.class);
         mAuth.createUserWithEmailAndPassword(getMail(), getPass())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -107,17 +107,16 @@ public class CreateAccActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("TAG", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            addInfo();
-                            //updateUI(user);
+                            updateUI(user);
+                            startActivity(intent);
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TAG", "createUserWithEmail:failure", task.getException());
                             Toast.makeText(CreateAccActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
+                            updateUI(null);
                         }
-
-                        // ...
                     }
                 });
     }
