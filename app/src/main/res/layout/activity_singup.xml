@@ -28,62 +28,107 @@
             tools:ignore="VectorDrawableCompat"
             android:contentDescription="TODO" />
 
+
         <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_signup_mailLayout"
-        android:hint="Mail"
-        android:textColorHint="@color/design_default_color_on_primary"
-        android:textSize="14sp"
-        app:startIconDrawable="@drawable/ic_user"
-        app:startIconTint="@color/design_default_color_on_primary"
-        android:inputType="textEmailAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:errorEnabled="true"
-        tools:ignore="MissingConstraints">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_signup_mail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/til_signup_nameLayout"
+            android:hint="Name"
+            android:textColorHint="@color/design_default_color_on_primary"
+            android:textSize="14sp"
+            app:startIconDrawable="@drawable/ic_user"
+            app:startIconTint="@color/design_default_color_on_primary"
             android:inputType="textEmailAddress"
-            android:textColor="@color/design_default_color_on_primary"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id = "@+id/til_signup_passLayout"
-        android:hint = "Pass"
-        android:textColorHint="@color/design_default_color_on_primary"
-        android:textSize="14sp"
-        app:startIconDrawable="@drawable/ic_pass"
-        app:startIconTint="@color/design_default_color_on_primary"
-        app:endIconMode="password_toggle"
-        app:endIconTint="@color/design_default_color_on_primary"
-        android:inputType="textPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:errorEnabled="true"
-        tools:ignore="MissingConstraints">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_signup_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_signup_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/design_default_color_on_primary"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_signup_mailLayout"
+            android:hint="Email"
+            android:textColorHint="@color/design_default_color_on_primary"
+            android:textSize="14sp"
+            app:startIconDrawable="@drawable/ic_mail_24dp"
+            app:startIconTint="@color/design_default_color_on_primary"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_signup_mail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/design_default_color_on_primary"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id = "@+id/til_signup_passLayout"
+            android:hint = "Pass"
+            android:textColorHint="@color/design_default_color_on_primary"
+            android:textSize="14sp"
+            app:startIconDrawable="@drawable/ic_pass"
+            app:startIconTint="@color/design_default_color_on_primary"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/design_default_color_on_primary"
             android:inputType="textPassword"
-            android:textColor="@color/design_default_color_on_primary"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            tools:ignore="MissingConstraints">
 
-    <Button
-        android:id="@+id/btn_signup_next"
-        android:text="Create"
-        android:layout_width="@android:dimen/thumbnail_height"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_launcher_button"
-        android:textColor="@color/design_default_color_on_primary"
-        android:textSize="24sp"
-        tools:ignore="MissingConstraints" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_signup_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="@color/design_default_color_on_primary"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id = "@+id/til_signup_cpassLayout"
+            android:hint = "Confirm Password"
+            android:textColorHint="@color/design_default_color_on_primary"
+            android:textSize="14sp"
+            app:startIconDrawable="@drawable/ic_pass"
+            app:startIconTint="@color/design_default_color_on_primary"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/design_default_color_on_primary"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_signup_cpass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="@color/design_default_color_on_primary"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_signup_next"
+            android:text="Create"
+            android:layout_width="@android:dimen/thumbnail_height"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_launcher_button"
+            android:textColor="@color/design_default_color_on_primary"
+            android:textSize="24sp"
+            tools:ignore="MissingConstraints" />
 
 
-    </LinearLayout>
+        </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

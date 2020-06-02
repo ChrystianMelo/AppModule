@@ -1,6 +1,7 @@
 package com.example.appmodule;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,14 +21,15 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.util.Objects;
 
 
 public class CreateAccActivity extends AppCompatActivity {
     Button btnNext;
-    TextInputEditText mail, pass;
-    TextInputLayout mailLayout,passLayout;
+    TextInputEditText mail, pass, name;
+    TextInputLayout mailLayout,passLayout, nameLayout;
     private FirebaseAuth mAuth;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -40,6 +42,11 @@ public class CreateAccActivity extends AppCompatActivity {
         return Objects.requireNonNull(pass.getText()).toString();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public String getName() {
+        return Objects.requireNonNull(name.getText()).toString();
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +55,8 @@ public class CreateAccActivity extends AppCompatActivity {
         btnNext = findViewById(R.id.btn_signup_next);
         mailLayout =  findViewById(R.id.til_signup_mailLayout);
         passLayout =  findViewById(R.id.til_signup_passLayout);
+        nameLayout =  findViewById(R.id.til_signup_nameLayout);
+        name    =  findViewById(R.id.tiet_signup_name);
         mail    =  findViewById(R.id.tiet_signup_mail);
         pass    =  findViewById(R.id.tiet_signup_pass);
 
@@ -55,6 +64,28 @@ public class CreateAccActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         setButtonFunct();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void addInfo(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(getName())
+                .setPhotoUri(Uri.parse("https://lh3.googleusercontent.com/-Mj_p8uemhx0/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucmtfvnixYvFPtRbroJwRGa3TTOLyg/photo.jpg"))
+                .build();
+
+        user.updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.i("hereeeeeee", "User profile updated.");
+                        }else{
+                            Log.i("hereeeeeee", "User profile nott updated.");
+                        }
+                    }
+                });
     }
     public void setButtonFunct(){
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +107,7 @@ public class CreateAccActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("TAG", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            addInfo();
                             //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -88,8 +120,5 @@ public class CreateAccActivity extends AppCompatActivity {
                         // ...
                     }
                 });
-    }
-
-    private void updateUI(FirebaseUser user) {
     }
 }

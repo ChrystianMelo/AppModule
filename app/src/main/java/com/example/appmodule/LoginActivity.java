@@ -1,6 +1,8 @@
 package com.example.appmodule;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         setButtonFunct();
     }
 
+
     public void checkData(){
         final Intent intent = new Intent(this,HomeActivity.class);
         mAuth.signInWithEmailAndPassword(getMail(), getPass())
@@ -75,6 +78,23 @@ public class LoginActivity extends AppCompatActivity {
                         // ...
                     }
                 });
+    }
+    public void setButtonFunct(){
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+                cleanErrorMessages(mailLayout);
+                cleanErrorMessages(passLayout);
+                setErrorMessages(mail,mailLayout,verificationMail(getMail()));
+                setErrorMessages(pass,passLayout,verificationPass(getPass()));
+                if(verifyFields()) checkData();
+            }
+        });
+    }
+
+    public void Create(View v){
+        startActivity(new Intent(this, CreateAccActivity.class));
     }
 
     public int verificationPass(String field){
@@ -110,24 +130,4 @@ public class LoginActivity extends AppCompatActivity {
     public void cleanErrorMessages(TextInputLayout field) {
         field.setError(null);
     }
-
-
-    public void setButtonFunct(){
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-            @Override
-            public void onClick(View v) {
-                cleanErrorMessages(mailLayout);
-                cleanErrorMessages(passLayout);
-                setErrorMessages(mail,mailLayout,verificationMail(getMail()));
-                setErrorMessages(pass,passLayout,verificationPass(getPass()));
-                if(verifyFields()) checkData();
-            }
-        });
-    }
-
-    public void Create(View v){
-        startActivity(new Intent(this, CreateAccActivity.class));
-    }
-
 }
