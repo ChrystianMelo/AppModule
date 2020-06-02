@@ -1,6 +1,7 @@
 package com.example.appmodule;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,73 +21,75 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LoginActivity extends AppCompatActivity {
+import java.util.Objects;
+
+
+public class CreateAccActivity extends AppCompatActivity {
     Button btnNext;
     TextInputEditText mail, pass;
     TextInputLayout mailLayout,passLayout;
     private FirebaseAuth mAuth;
 
-
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public String getMail() {
-        return mail.getText().toString();
+        return Objects.requireNonNull(mail.getText()).toString();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public String getPass() {
-        return pass.getText().toString();
+        return Objects.requireNonNull(pass.getText()).toString();
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_singup);
 
-        btnNext = findViewById(R.id.btn_login_next);
-        mailLayout =  findViewById(R.id.til_login_mailLayout);
-        passLayout =  findViewById(R.id.til_login_passLayout);
-        mail    =  findViewById(R.id.tiet_login_mail);
-        pass    =  findViewById(R.id.tiet_login_pass);
+        btnNext = findViewById(R.id.btn_signup_next);
+        mailLayout =  findViewById(R.id.til_signup_mailLayout);
+        passLayout =  findViewById(R.id.til_signup_passLayout);
+        mail    =  findViewById(R.id.tiet_signup_mail);
+        pass    =  findViewById(R.id.tiet_signup_pass);
 
+        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
         setButtonFunct();
     }
+    public void setButtonFunct(){
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+                setOnDB();
+            }
+        });
+    }
 
-    public void checkData(){
-        final Intent intent = new Intent(this,HomeActivity.class);
-        mAuth.signInWithEmailAndPassword(getMail(), getPass())
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    void setOnDB(){
+        mAuth.createUserWithEmailAndPassword(getMail(), getPass())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.i("heree", "signInWithEmail:success");
+                            Log.d("TAG", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
-                            startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.i("heree", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            Log.w("TAG", "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(CreateAccActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }
+
                         // ...
                     }
                 });
     }
 
-    public void setButtonFunct(){
-        final Intent intent = new Intent(this, HomeActivity.class);
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkData();
-                }
-        });
+    private void updateUI(FirebaseUser user) {
     }
-
-    public void Create(View v){
-        startActivity(new Intent(this, CreateAccActivity.class));
-    }
-
 }

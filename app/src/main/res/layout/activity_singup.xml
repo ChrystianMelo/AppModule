@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
+    tools:context=".CreateAccActivity"
     android:background="@color/colorPrimaryDark">
 
     <LinearLayout
@@ -29,7 +29,7 @@
             android:contentDescription="TODO" />
 
         <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_login_mailLayout"
+        android:id="@+id/til_signup_mailLayout"
         android:hint="Mail"
         android:textColorHint="@color/design_default_color_on_primary"
         android:textSize="14sp"
@@ -42,7 +42,7 @@
         tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_login_mail"
+            android:id="@+id/tiet_signup_mail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
@@ -51,7 +51,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id = "@+id/til_login_passLayout"
+        android:id = "@+id/til_signup_passLayout"
         android:hint = "Pass"
         android:textColorHint="@color/design_default_color_on_primary"
         android:textSize="14sp"
@@ -66,7 +66,7 @@
         tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_login_pass"
+            android:id="@+id/tiet_signup_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
@@ -74,8 +74,8 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btn_login_next"
-        android:text="Log-In"
+        android:id="@+id/btn_signup_next"
+        android:text="Create"
         android:layout_width="@android:dimen/thumbnail_height"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_launcher_button"
@@ -83,34 +83,7 @@
         android:textSize="24sp"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/txt_login_forgotten"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Forgot?"
-        android:textColor="@color/design_default_color_on_primary"
-        android:textSize="15sp"
-        tools:ignore="MissingConstraints" />
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        tools:ignore="MissingConstraints,ScrollViewCount"
-        android:gravity="bottom|center_horizontal"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/txt_login_create"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="NewAcc"
-            android:onClick="Create"
-            android:textColor="@color/design_default_color_on_primary"
-            android:textSize="15sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
