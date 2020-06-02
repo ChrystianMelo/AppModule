@@ -1,6 +1,7 @@
 package com.example.appmodule;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,6 +19,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
     Button btnNext;
@@ -73,13 +77,52 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    public int verificationPass(String field){
+        if (field.isEmpty()) return 0;
+        if (field.length()<8) return -1;
+        return 1;
+    }
+    public int verificationMail(String field){
+        if (field.isEmpty()) return 0;
+        if ((field.indexOf('.') == -1 ||
+                field.indexOf('@') == -1) ||
+                field.length() < 2)
+            return -1;
+        return 1;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void setErrorMessages(TextInputEditText txt, TextInputLayout field, int vf) {
+        if (vf == 1) {
+            field.setError(null);
+        } else if (vf == -1) {
+            field.setError("Incorrect Format");
+        } else if (vf == 0) {
+            field.setError("Campo vazio");
+        }
+    }
+
+    public boolean verifyFields() {
+        return mailLayout.getError() == null &&
+                passLayout.getError() == null;
+    }
+
+    public void cleanErrorMessages(TextInputLayout field) {
+        field.setError(null);
+    }
+
+
     public void setButtonFunct(){
-        final Intent intent = new Intent(this, HomeActivity.class);
         btnNext.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                checkData();
-                }
+                cleanErrorMessages(mailLayout);
+                cleanErrorMessages(passLayout);
+                setErrorMessages(mail,mailLayout,verificationMail(getMail()));
+                setErrorMessages(pass,passLayout,verificationPass(getPass()));
+                if(verifyFields()) checkData();
+            }
         });
     }
 
