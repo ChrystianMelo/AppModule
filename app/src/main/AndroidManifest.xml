@@ -24,6 +24,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".CreateAccActivity" />
         <activity android:name=".ProfileActivity"/>
+        <activity android:name=".DialogProfile"/>
     </application>
 
 </manifest>

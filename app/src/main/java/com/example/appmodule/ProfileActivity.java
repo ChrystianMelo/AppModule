@@ -1,12 +1,14 @@
 package com.example.appmodule;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -26,6 +27,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     TextView nametxt,emailtxt;
     ImageView img;
+    Button upd;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -33,14 +35,31 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        nametxt = findViewById(R.id.name);
-        img = findViewById(R.id.image);
-        emailtxt = findViewById(R.id.mail);
+        nametxt = findViewById(R.id.txt_profile_name);
+        img = findViewById(R.id.img_profile_picture);
+        emailtxt = findViewById(R.id.txt_profile_mail);
+        upd = findViewById(R.id.btn_profile_update);
 
         getData();
 
+        setButtonFunctions();
+
     }
 
+    public void openDialog(){
+        DialogProfile dialog  = new DialogProfile();
+        dialog.show(getSupportFragmentManager(), "Dialog Profile");
+    }
+
+    public void setButtonFunctions(){
+        upd.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+                openDialog();
+            }
+        });
+    }
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void getData() {
         nametxt.postDelayed(new Runnable() {
@@ -54,9 +73,10 @@ public class ProfileActivity extends AppCompatActivity {
         }, 1000);
     }
     private static class DownLoadImageTask extends AsyncTask<String,Void,Bitmap> {
+        @SuppressLint("StaticFieldLeak")
         ImageView imageView;
 
-        public DownLoadImageTask(ImageView imageView){
+        DownLoadImageTask(ImageView imageView){
             this.imageView = imageView;
         }
 

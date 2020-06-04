@@ -15,4 +15,11 @@
     <string name="menu_slideshow">Slideshow</string>
 
     <string name="home_second">Home Second</string>
+    <string name="email">Email.:</string>
+    <string name="name">Name.:</string>
+    <string name="todo">TODO</string>
+    <string name="profileTitle">Profile</string>
+    <string name="pass">Password.:</string>
+    <string name="user_info">Personal Info.:</string>
+    <string name="update">Update</string>
 </resources>
