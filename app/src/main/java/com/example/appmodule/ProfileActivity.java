@@ -1,6 +1,7 @@
 package com.example.appmodule;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -23,11 +24,14 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Objects;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements DialogProfile.DialogProfileListener {
 
     TextView nametxt,emailtxt;
-    ImageView img;
-    Button upd;
+    ImageView imgview;
+    Button infoupd;
+    ImageButton imgupd;
+    public static final int PICK_IMAGE = 1;
+
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -36,14 +40,28 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         nametxt = findViewById(R.id.txt_profile_name);
-        img = findViewById(R.id.img_profile_picture);
+        imgview = findViewById(R.id.img_profile_picture);
         emailtxt = findViewById(R.id.txt_profile_mail);
-        upd = findViewById(R.id.btn_profile_update);
+        infoupd = findViewById(R.id.btn_profile_update);
+        imgupd = findViewById(R.id.imgbtn_profile_updImg);
 
         getData();
 
         setButtonFunctions();
 
+    }
+
+    @Override
+    public void applyTexts(String username, String usermail, String userpass) {
+        //setData(username, usermail, userpass);
+        //getData();
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == PICK_IMAGE) {
+            //TODO: action
+        }
     }
 
     public void openDialog(){
@@ -52,21 +70,37 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void setButtonFunctions(){
-        upd.setOnClickListener(new View.OnClickListener() {
+        infoupd.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
                 openDialog();
             }
         });
-    }
+        imgupd.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+                Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                getIntent.setType("image/*");
+
+                Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                pickIntent.setType("image/*");
+
+                Intent chooserIntent = Intent.createChooser(getIntent, "Select Image");
+                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
+
+                startActivityForResult(chooserIntent, PICK_IMAGE);
+            }
+        });
+}
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void getData() {
         nametxt.postDelayed(new Runnable() {
             @Override
             public void run() {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                new DownLoadImageTask(img).execute(Objects.requireNonNull(Objects.requireNonNull(user).getPhotoUrl()).toString());
+                new DownLoadImageTask(imgview).execute(Objects.requireNonNull(Objects.requireNonNull(user).getPhotoUrl()).toString());
                 nametxt.append(Objects.requireNonNull(user).getDisplayName());
                 emailtxt.append(Objects.requireNonNull(user).getEmail());
             }

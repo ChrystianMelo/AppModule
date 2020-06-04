@@ -80,12 +80,17 @@
                 android:gravity="center_vertical|left"
                 tools:ignore="RtlHardcoded">
                 <TextView
-                    android:id="@+id/txt_profile_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/design_default_color_on_primary"
                     android:textSize="20sp"
                     android:text="@string/name"/>
+                <TextView
+                    android:id="@+id/txt_profile_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/design_default_color_on_primary"
+                    android:textSize="15sp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -94,12 +99,17 @@
                 android:gravity="center_vertical|left"
                 tools:ignore="RtlHardcoded">
                 <TextView
-                    android:id="@+id/txt_profile_mail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/design_default_color_on_primary"
                     android:textSize="20sp"
                     android:text="@string/email"/>
+                <TextView
+                    android:id="@+id/txt_profile_mail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/design_default_color_on_primary"
+                    android:textSize="15sp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -108,12 +118,17 @@
                 android:gravity="center_vertical|left"
                 tools:ignore="RtlHardcoded">
                 <TextView
-                    android:id="@+id/txt_profile_pass"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/design_default_color_on_primary"
                     android:textSize="20sp"
                     android:text="@string/pass"/>
+                <TextView
+                    android:id="@+id/txt_profile_pass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/design_default_color_on_primary"
+                    android:textSize="15sp"/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout

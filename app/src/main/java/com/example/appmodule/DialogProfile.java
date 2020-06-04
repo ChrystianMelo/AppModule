@@ -2,20 +2,46 @@ package com.example.appmodule;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.Objects;
 
 public class DialogProfile extends AppCompatDialogFragment {
+
+    TextInputEditText mail, pass, name;
+    TextInputLayout mailLayout,passLayout, nameLayout;
+    DialogProfileListener listener;
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public String getMail() {
+        return Objects.requireNonNull(mail.getText()).toString();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public String getPass() {
+        return Objects.requireNonNull(pass.getText()).toString();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public String getName() {
+        return Objects.requireNonNull(name.getText()).toString();
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @NonNull
     @Override
@@ -35,9 +61,36 @@ public class DialogProfile extends AppCompatDialogFragment {
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        String username = "Joazin";
+                        String usermail = "joazin@gmail.com";
+                        String userpass = "4444321";
+                        listener.applyTexts(username,usermail,userpass);
                     }
                 });
+
+        mailLayout = view.findViewById(R.id.til_signup_mailLayout);
+        passLayout =  view.findViewById(R.id.til_signup_passLayout);
+        nameLayout =  view.findViewById(R.id.til_signup_nameLayout);
+        name    =  view.findViewById(R.id.tiet_signup_name);
+        mail    =  view.findViewById(R.id.tiet_signup_mail);
+        pass    =  view.findViewById(R.id.tiet_signup_pass);
         return builder.create();
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        try {
+            listener = (DialogProfileListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()+
+                    "must implement DialogProfileListener");
+        }
+
+    }
+
+    public interface DialogProfileListener{
+        void applyTexts(String username,String usermail, String userpass);
     }
 }
