@@ -32,6 +32,8 @@ public class ProfileServices extends AppCompatActivity {
 
     public String getUri() { return user.getEmail();}
 
+    public String getUID() { return user.getUid();}
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public String getMail() { return Objects.requireNonNull(user.getPhotoUrl()).toString();}
 
@@ -39,7 +41,7 @@ public class ProfileServices extends AppCompatActivity {
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         final StorageReference storageRef = storage.getReference();
-        final StorageReference mountainsRef = storageRef.child("images/user.jpg");
+        final StorageReference mountainsRef = storageRef.child("images/"+getUID()+".jpg");
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -54,7 +56,7 @@ public class ProfileServices extends AppCompatActivity {
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                storageRef.child("images/user.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                mountainsRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onSuccess(Uri uri) {
