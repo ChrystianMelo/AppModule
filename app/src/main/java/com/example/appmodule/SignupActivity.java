@@ -30,7 +30,6 @@ public class SignupActivity extends AppCompatActivity {
     Button btnNext;
     TextInputEditText mail, pass, name;
     TextInputLayout mailLayout,passLayout, nameLayout;
-    private FirebaseAuth mAuth;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public String getMail() {
@@ -60,64 +59,36 @@ public class SignupActivity extends AppCompatActivity {
         mail    =  findViewById(R.id.tiet_signup_mail);
         pass    =  findViewById(R.id.tiet_signup_pass);
 
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
-
         setButtonFunct();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void updateUI(FirebaseUser user){
-
-        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName(getName())
-                .setPhotoUri(Uri.parse("https://lh3.googleusercontent.com/-Mj_p8uemhx0/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucmtfvnixYvFPtRbroJwRGa3TTOLyg/photo.jpg"))
-                .build();
-
-        Objects.requireNonNull(user).updateProfile(profileUpdates)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.i("hereeeeeee", "User profile updated.");
-                        }else{
-                            Log.i("hereeeeeee", "User profile nott updated.");
-                        }
-                    }
-                });
-    }
     public void setButtonFunct(){
         btnNext.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                setOnDB();
+                FieldVerification verify = new FieldVerification();
+                verify.cleanErrorMessages(mailLayout);
+                verify.cleanErrorMessages(nameLayout);
+                verify.cleanErrorMessages(passLayout);
+                verify.setErrorMessages(mail,mailLayout,verify.verificationMail(getMail()));
+                verify.setErrorMessages(name,nameLayout,verify.verificationName(getName()));
+                verify.setErrorMessages(pass,passLayout,verify.verificationPass(getPass()));
+                if( verify.isVerified(passLayout) &&
+                    verify.isVerified(mailLayout) &&
+                    verify.isVerified(nameLayout)){
+                        createAcc();
+                    }
             }
         });
     }
-
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    void setOnDB(){
-        final Intent intent = new Intent(this, ProfileActivity.class);
-        mAuth.createUserWithEmailAndPassword(getMail(), getPass())
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("TAG", "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("TAG", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(SignupActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-                    }
-                });
+    public void createAcc() {
+        SignupServices services = new SignupServices(getName(), getMail(), getPass());
+        services.setData();
+        if (services.getSigned()) {
+            startActivity(new Intent(this, ProfileActivity.class));
+        }
     }
+
 }

@@ -25,6 +25,9 @@
         <activity android:name=".SignupActivity" />
         <activity android:name=".ProfileActivity"/>
         <activity android:name=".DialogProfile"/>
+        <activity android:name=".FieldVerification"/>
+        <activity android:name=".SignupServices" />
+        <activity android:name=".ProfileServices" />
     </application>
 
 </manifest>

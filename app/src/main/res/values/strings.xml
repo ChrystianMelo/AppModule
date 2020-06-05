@@ -25,4 +25,5 @@
     <string name="log">Log-In</string>
     <string name="forgotPass">Forgot your pasword?</string>
     <string name="newacc">Create new account</string>
+    <string name="logout">LogOut</string>
 </resources>

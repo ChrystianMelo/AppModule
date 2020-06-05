@@ -68,10 +68,19 @@ public class DialogProfile extends AppCompatDialogFragment {
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String username = getName();
-                        String usermail = getMail();
-                        String userpass = getPass();
-                        listener.applyTexts(username,usermail,userpass);
+                        FieldVerification verify = new FieldVerification();
+                        verify.cleanErrorMessages(mailLayout);
+                        verify.cleanErrorMessages(passLayout);
+                        verify.cleanErrorMessages(nameLayout);
+                        verify.setErrorMessages(mail,mailLayout,verify.verificationMail(getMail()));
+                        verify.setErrorMessages(pass,passLayout,verify.verificationPass(getPass()));
+                        verify.setErrorMessages(name,nameLayout,verify.verificationName(getName()));
+                        if(verify.isVerified(passLayout) && verify.isVerified(mailLayout) && verify.isVerified(nameLayout)) {
+                            String username = getName();
+                            String usermail = getMail();
+                            String userpass = getPass();
+                            listener.applyTexts(username, usermail, userpass);
+                        }
                     }
                 });
         return builder.create();
