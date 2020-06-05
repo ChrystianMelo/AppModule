@@ -50,6 +50,13 @@ public class DialogProfile extends AppCompatDialogFragment {
         LayoutInflater inflater = Objects.requireNonNull(getActivity()).getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_profile, null);
 
+        mailLayout = view.findViewById(R.id.til_dialog_mailLayout);
+        passLayout =  view.findViewById(R.id.til_dialog_passLayout);
+        nameLayout =  view.findViewById(R.id.til_dialog_nameLayout);
+        name    =  view.findViewById(R.id.tiet_dialog_name);
+        mail    =  view.findViewById(R.id.tiet_dialog_mail);
+        pass    =  view.findViewById(R.id.tiet_dialog_pass);
+
         builder.setView(view)
                 .setTitle("Update Info")
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -61,19 +68,12 @@ public class DialogProfile extends AppCompatDialogFragment {
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String username = "Joazin";
-                        String usermail = "joazin@gmail.com";
-                        String userpass = "4444321";
+                        String username = getName();
+                        String usermail = getMail();
+                        String userpass = getPass();
                         listener.applyTexts(username,usermail,userpass);
                     }
                 });
-
-        mailLayout = view.findViewById(R.id.til_signup_mailLayout);
-        passLayout =  view.findViewById(R.id.til_signup_passLayout);
-        nameLayout =  view.findViewById(R.id.til_signup_nameLayout);
-        name    =  view.findViewById(R.id.tiet_signup_name);
-        mail    =  view.findViewById(R.id.tiet_signup_mail);
-        pass    =  view.findViewById(R.id.tiet_signup_pass);
         return builder.create();
     }
 
