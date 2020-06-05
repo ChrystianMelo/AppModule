@@ -1,4 +1,4 @@
-package com.example.appmodule;
+package com.example.appmodule.utils;
 
 import android.os.Build;
 

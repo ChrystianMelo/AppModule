@@ -1,4 +1,4 @@
-package com.example.appmodule;
+package com.example.appmodule.utils;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -8,16 +8,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.example.appmodule.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 

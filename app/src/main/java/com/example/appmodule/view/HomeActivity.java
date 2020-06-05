@@ -1,10 +1,13 @@
-package com.example.appmodule;
+package com.example.appmodule.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+
+import com.example.appmodule.utils.FeedAdapter;
+import com.example.appmodule.R;
 
 public class HomeActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.appmodule;
+package com.example.appmodule.view;
 
 import android.content.Intent;
 import android.os.Build;
@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.appmodule.utils.FieldVerification;
+import com.example.appmodule.R;
+import com.example.appmodule.data.account.LoginServices;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 

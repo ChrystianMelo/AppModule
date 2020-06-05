@@ -1,10 +1,13 @@
-package com.example.appmodule;
+package com.example.appmodule.utils;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.appmodule.R;
+import com.example.appmodule.view.LoginActivity;
+import com.example.appmodule.view.ProfileActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

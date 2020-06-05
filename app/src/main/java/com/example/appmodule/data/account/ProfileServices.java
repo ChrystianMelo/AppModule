@@ -1,4 +1,4 @@
-package com.example.appmodule;
+package com.example.appmodule.data.account;
 
 import android.os.Build;
 
@@ -19,27 +19,8 @@ public class ProfileServices extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void setData(final String name, String mail, String pass){
+    public void setData(final String name, final String mail, final String pass){
         final boolean[] updated = new boolean[1];
-        user.updatePassword(pass)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            updated[0] = true;
-                        }
-                    }
-                });
-        Objects.requireNonNull(user).updatePassword(pass);
-        user.updateEmail(mail)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            updated[0] = true;
-                        }
-                    }
-                });
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(name)
                 .build();
@@ -48,6 +29,8 @@ public class ProfileServices extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
+                            user.updatePassword(pass);
+                            user.updateEmail(mail);
                             updated[0] = true;
                         }
                     }

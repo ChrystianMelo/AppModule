@@ -1,4 +1,4 @@
-package com.example.appmodule;
+package com.example.appmodule.view;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -15,6 +14,10 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.appmodule.utils.DialogProfile;
+import com.example.appmodule.R;
+import com.example.appmodule.data.account.ProfileServices;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -44,9 +47,7 @@ public class ProfileActivity extends AppCompatActivity implements DialogProfile.
         imgupd = findViewById(R.id.imgbtn_profile_updImg);
         logout = findViewById(R.id.imgbtn_profile_logout);
 
-
         getData();
-
         setButtonFunctions();
 
     }
