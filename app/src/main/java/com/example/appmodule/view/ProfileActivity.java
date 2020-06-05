@@ -1,12 +1,14 @@
 package com.example.appmodule.view;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -18,9 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.appmodule.utils.DialogProfile;
 import com.example.appmodule.R;
 import com.example.appmodule.data.account.ProfileServices;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Objects;
@@ -32,7 +32,6 @@ public class ProfileActivity extends AppCompatActivity implements DialogProfile.
     ImageButton infoupd, imgupd, logout;
 
     public static final int PICK_IMAGE = 1;
-
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -52,34 +51,6 @@ public class ProfileActivity extends AppCompatActivity implements DialogProfile.
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @Override
-    public void applyTexts(String username, String usermail, String userpass) {
-        ProfileServices services = new ProfileServices();
-        services.setData(username, usermail, userpass);
-        //refresh();
-    }
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        //
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void getData() {
-        nametxt.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                new ProfileActivity.DownLoadImageTask(imgview).execute(Objects.requireNonNull(Objects.requireNonNull(user).getPhotoUrl()).toString());
-                nametxt.setText(Objects.requireNonNull(user).getDisplayName());
-                emailtxt.setText(Objects.requireNonNull(user).getEmail());
-            }
-        }, 1000);
-    }
-
-
     public void openDialog(){
         DialogProfile dialog  = new DialogProfile();
         dialog.show(getSupportFragmentManager(), "Dialog Profile");
@@ -97,7 +68,9 @@ public class ProfileActivity extends AppCompatActivity implements DialogProfile.
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
+                ProfileServices services = new ProfileServices();
+                services.signOut();
+                goHome();
             }
         });
         imgupd.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +80,56 @@ public class ProfileActivity extends AppCompatActivity implements DialogProfile.
                 getImg();
             }
         });
-}
+    }
+
+    void goHome(){
+        startActivity(new Intent(this, HomeActivity.class));
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void getData() {
+        final ProfileServices services = new ProfileServices();
+        nametxt.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                new ProfileActivity.DownLoadImageTask(imgview).execute(services.getUri());
+                nametxt.setText(services.getName());
+                emailtxt.setText(services.getMail());
+            }
+        }, 1000);
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void applyTexts(String username, String usermail, String userpass) {
+        ProfileServices services = new ProfileServices();
+        services.setData(username, usermail, userpass);
+        //refresh();
+    }
+
+
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == PICK_IMAGE) {
+                Bitmap bitmap;
+                try {
+                    ProfileServices services = new ProfileServices();
+                    bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(Objects.requireNonNull(data.getData())));
+                    services.putFile(bitmap);
+                    Log.i("chrys", "GET FROM LOCAL.: OK");
+                } catch (FileNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    Log.i("chrys", "GET FROM LOCAL.: RUIM");
+                }
+            }
+        }
+    }
 
     @SuppressLint("IntentReset")
     public void getImg(){

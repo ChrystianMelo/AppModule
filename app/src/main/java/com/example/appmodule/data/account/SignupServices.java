@@ -1,5 +1,6 @@
 package com.example.appmodule.data.account;
-
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
@@ -9,11 +10,19 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 
 public class SignupServices extends AppCompatActivity {
     String name, pass, mail, link;
@@ -40,7 +49,7 @@ public class SignupServices extends AppCompatActivity {
         setName(name);
         setMail(mail);
         setPass(pass);
-        setLink("https://lh3.googleusercontent.com/-Mj_p8uemhx0/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucmtfvnixYvFPtRbroJwRGa3TTOLyg/photo.jpg");
+        setLink("https://firebasestorage.googleapis.com/v0/b/appmodule-f6c22.appspot.com/o/images%2Fprofile.jpg?alt=media&token=ec92b4b3-18d6-4185-a1e0-8739577b2832");
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -85,4 +94,7 @@ public class SignupServices extends AppCompatActivity {
             compare(name,email,photoUrl.getPath());
         }
     }
+
+
+
 }
