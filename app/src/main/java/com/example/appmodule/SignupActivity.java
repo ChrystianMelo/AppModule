@@ -26,7 +26,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import java.util.Objects;
 
 
-public class CreateAccActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity {
     Button btnNext;
     TextInputEditText mail, pass, name;
     TextInputLayout mailLayout,passLayout, nameLayout;
@@ -113,7 +113,7 @@ public class CreateAccActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TAG", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(CreateAccActivity.this, "Authentication failed.",
+                            Toast.makeText(SignupActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }

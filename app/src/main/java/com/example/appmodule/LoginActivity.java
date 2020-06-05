@@ -1,8 +1,6 @@
 package com.example.appmodule;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,8 +19,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
     Button btnNext;
@@ -94,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void Create(View v){
-        startActivity(new Intent(this, CreateAccActivity.class));
+        startActivity(new Intent(this, SignupActivity.class));
     }
 
     public int verificationPass(String field){

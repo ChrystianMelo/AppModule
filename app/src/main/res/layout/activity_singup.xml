@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateAccActivity"
+    tools:context=".SignupActivity"
     android:background="@color/colorPrimaryDark">
 
     <LinearLayout
@@ -20,18 +20,18 @@
         >
 
         <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/image"
+            android:id="@+id/gif_signup_image"
             android:layout_width="200dp"
             android:layout_height="150dp"
             android:src="@drawable/logo_anim"
             android:background="@color/colorPrimaryDark"
             tools:ignore="VectorDrawableCompat"
-            android:contentDescription="TODO" />
+            android:contentDescription="@string/todo" />
 
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_signup_nameLayout"
-            android:hint="Name"
+            android:hint="@string/name"
             android:textColorHint="@color/design_default_color_on_primary"
             android:textSize="14sp"
             app:startIconDrawable="@drawable/ic_user"
@@ -53,7 +53,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_signup_mailLayout"
-            android:hint="Email"
+            android:hint="@string/email"
             android:textColorHint="@color/design_default_color_on_primary"
             android:textSize="14sp"
             app:startIconDrawable="@drawable/ic_mail_24dp"
@@ -127,8 +127,6 @@
             android:textColor="@color/design_default_color_on_primary"
             android:textSize="24sp"
             tools:ignore="MissingConstraints" />
-
-
         </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

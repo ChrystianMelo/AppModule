@@ -26,11 +26,11 @@
             android:src="@drawable/logo_anim"
             android:background="@color/colorPrimaryDark"
             tools:ignore="VectorDrawableCompat"
-            android:contentDescription="TODO" />
+            android:contentDescription="@string/todo" />
 
         <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_login_mailLayout"
-        android:hint="Mail"
+        android:hint="@string/mail"
         android:textColorHint="@color/design_default_color_on_primary"
         android:textSize="14sp"
         app:startIconDrawable="@drawable/ic_user"
@@ -52,7 +52,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id = "@+id/til_login_passLayout"
-        android:hint = "Pass"
+        android:hint = "@string/pass"
         android:textColorHint="@color/design_default_color_on_primary"
         android:textSize="14sp"
         app:startIconDrawable="@drawable/ic_pass"
@@ -75,7 +75,7 @@
 
     <Button
         android:id="@+id/btn_login_next"
-        android:text="Log-In"
+        android:text="@string/log"
         android:layout_width="@android:dimen/thumbnail_height"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_launcher_button"
@@ -88,7 +88,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Forgot?"
+        android:text="@string/forgotPass"
         android:textColor="@color/design_default_color_on_primary"
         android:textSize="15sp"
         tools:ignore="MissingConstraints" />
@@ -107,7 +107,7 @@
             android:id="@+id/txt_login_create"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NewAcc"
+            android:text="@string/newacc"
             android:onClick="Create"
             android:textColor="@color/design_default_color_on_primary"
             android:textSize="15sp" />

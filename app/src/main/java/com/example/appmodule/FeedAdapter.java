@@ -49,8 +49,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            v1 = itemView.findViewById(R.id.txt1);
-            v2 = itemView.findViewById(R.id.txt2);
+            v1 = itemView.findViewById(R.id.txt_feed_title);
+            v2 = itemView.findViewById(R.id.txt_feed_comments);
             img = itemView.findViewById(R.id.image);
         }
     }

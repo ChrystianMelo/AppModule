@@ -8,7 +8,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_dialog_nameLayout"
-        android:hint="Name"
+        android:hint="@string/name"
         android:textColorHint="@color/colorFont"
         android:textSize="14sp"
         app:startIconDrawable="@drawable/ic_user"
@@ -29,7 +29,7 @@
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_dialog_mailLayout"
-        android:hint="Email"
+        android:hint="@string/email"
         android:textColorHint="@color/colorFont"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/til_dialog_nameLayout"
@@ -51,7 +51,7 @@
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_dialog_passLayout"
-        android:hint="Password"
+        android:hint="@string/pass"
         android:textColorHint="@color/colorFont"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/til_dialog_mailLayout"
