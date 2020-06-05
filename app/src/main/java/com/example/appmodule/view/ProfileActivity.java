@@ -86,6 +86,7 @@ public class ProfileActivity extends AppCompatActivity implements DialogProfile.
         startActivity(new Intent(this, HomeActivity.class));
     }
 
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void getData() {
         final ProfileServices services = new ProfileServices();
