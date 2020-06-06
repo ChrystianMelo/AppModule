@@ -13,7 +13,7 @@ public class HomeActivity extends AppCompatActivity {
 
     String[] title;
     String[] content;
-    int images[] = {R.drawable.logo,R.drawable.logo};
+    int[] images = {R.drawable.logo,R.drawable.logo};
     RecyclerView view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +22,8 @@ public class HomeActivity extends AppCompatActivity {
 
         view = findViewById(R.id.rv_home_view);
 
-        title = getCount(title,2);
-        content = getCount(title,2);
+        title = getCount("title",2);
+        content = getCount("Content",2);
 
         FeedAdapter adapter = new FeedAdapter(this, title,content,images);
         view.setAdapter(adapter);
@@ -31,10 +31,10 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    String[] getCount(String[] str, int size){
-        str = new String[size];
+    String[] getCount(String str, int size){
+        String [] strSet = new String[size];
         for(int i =0; i<size;i++)
-            str[i] = "info"+Integer.toString(i);
-        return str;
+            strSet[i] = str + i;
+        return strSet;
     }
 }

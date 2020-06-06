@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.appmodule.R;
 
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> {
-    Context ct;
-    String[] title;
-    String[] content;
-    int[] images;
+    private Context ct;
+    private String[] title;
+    private String[] content;
+    private int[] images;
 
     public FeedAdapter(Context ct, String[] title, String[] content, int[] images){
         this.ct = ct;
@@ -45,15 +45,15 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
         return 2;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView v1,v2;
         ImageView img;
 
-        public MyViewHolder(@NonNull View itemView) {
+        MyViewHolder(@NonNull View itemView) {
             super(itemView);
             v1 = itemView.findViewById(R.id.txt_feed_title);
             v2 = itemView.findViewById(R.id.txt_feed_comments);
-            img = itemView.findViewById(R.id.image);
+            img = itemView.findViewById(R.id.img_feed_post);
         }
     }
 }

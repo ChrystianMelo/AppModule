@@ -9,10 +9,11 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
 import com.example.appmodule.utils.FieldVerification;
 import com.example.appmodule.R;
-import com.example.appmodule.data.account.SignupServices;
+import com.example.appmodule.repositories.account.SignupRepository;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -77,11 +78,18 @@ public class SignupActivity extends AppCompatActivity {
     }
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void createAcc() {
-        SignupServices services = new SignupServices(getName(), getMail(), getPass());
-        services.setData();
-        if (services.getSigned()) {
-            startActivity(new Intent(this, ProfileActivity.class));
-        }
+        SignupRepository services = new SignupRepository(getName(), getMail(), getPass());
+        services.setData().observe(this, new Observer() {
+            @Override
+            public void onChanged(Object o) {
+                if(o.equals(true))
+                    goHome();
+            }
+        });
+    }
+
+    void goHome(){
+        startActivity(new Intent(this, HomeActivity.class));
     }
 
 }

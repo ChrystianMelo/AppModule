@@ -27,7 +27,7 @@
             android:textColor="@color/colorFont"
             />
     </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
+    <!--com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_dialog_mailLayout"
         android:hint="@string/email"
         android:textColorHint="@color/colorFont"
@@ -49,7 +49,7 @@
             android:textColor="@color/colorFont"
             />
     </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
+    <!com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_dialog_passLayout"
         android:hint="@string/pass"
         android:textColorHint="@color/colorFont"
@@ -70,6 +70,6 @@
             android:inputType="textEmailAddress"
             android:textColor="@color/colorFont"
             />
-    </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

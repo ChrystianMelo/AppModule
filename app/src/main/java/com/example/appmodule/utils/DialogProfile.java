@@ -1,5 +1,6 @@
 package com.example.appmodule.utils;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -22,19 +23,9 @@ import java.util.Objects;
 
 public class DialogProfile extends AppCompatDialogFragment {
 
-    TextInputEditText mail, pass, name;
-    TextInputLayout mailLayout,passLayout, nameLayout;
-    DialogProfileListener listener;
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public String getMail() {
-        return Objects.requireNonNull(mail.getText()).toString();
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public String getPass() {
-        return Objects.requireNonNull(pass.getText()).toString();
-    }
+    private TextInputEditText name;
+    private TextInputLayout nameLayout;
+    private DialogProfileListener listener;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public String getName() {
@@ -47,14 +38,10 @@ public class DialogProfile extends AppCompatDialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = Objects.requireNonNull(getActivity()).getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_profile, null);
+        @SuppressLint("InflateParams") View view = inflater.inflate(R.layout.dialog_profile, null);
 
-        mailLayout = view.findViewById(R.id.til_dialog_mailLayout);
-        passLayout =  view.findViewById(R.id.til_dialog_passLayout);
-        nameLayout =  view.findViewById(R.id.til_dialog_nameLayout);
+        nameLayout = view.findViewById(R.id.til_dialog_nameLayout);
         name    =  view.findViewById(R.id.tiet_dialog_name);
-        mail    =  view.findViewById(R.id.tiet_dialog_mail);
-        pass    =  view.findViewById(R.id.tiet_dialog_pass);
 
         builder.setView(view)
                 .setTitle("Update Info")
@@ -68,17 +55,11 @@ public class DialogProfile extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         FieldVerification verify = new FieldVerification();
-                        verify.cleanErrorMessages(mailLayout);
-                        verify.cleanErrorMessages(passLayout);
                         verify.cleanErrorMessages(nameLayout);
-                        verify.setErrorMessages(mail,mailLayout,verify.verificationMail(getMail()));
-                        verify.setErrorMessages(pass,passLayout,verify.verificationPass(getPass()));
                         verify.setErrorMessages(name,nameLayout,verify.verificationName(getName()));
-                        if(verify.isVerified(passLayout) && verify.isVerified(mailLayout) && verify.isVerified(nameLayout)) {
+                        if(verify.isVerified(nameLayout)) {
                             String username = getName();
-                            String usermail = getMail();
-                            String userpass = getPass();
-                            listener.applyTexts(username, usermail, userpass);
+                            listener.applyTexts(username);
                         }
                     }
                 });
@@ -99,6 +80,6 @@ public class DialogProfile extends AppCompatDialogFragment {
     }
 
     public interface DialogProfileListener{
-        void applyTexts(String username,String usermail, String userpass);
+        void applyTexts(String username);
     }
 }

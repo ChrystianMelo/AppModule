@@ -16,10 +16,11 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
 import com.example.appmodule.utils.DialogProfile;
 import com.example.appmodule.R;
-import com.example.appmodule.data.account.ProfileServices;
+import com.example.appmodule.repositories.account.ProfileRepository;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
@@ -68,7 +69,7 @@ public class ProfileActivity extends AppCompatActivity implements DialogProfile.
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                ProfileServices services = new ProfileServices();
+                ProfileRepository services = new ProfileRepository();
                 services.signOut();
                 goHome();
             }
@@ -84,11 +85,16 @@ public class ProfileActivity extends AppCompatActivity implements DialogProfile.
 
     void goHome(){
         startActivity(new Intent(this, HomeActivity.class));
+        finish();
+    }
+    void refresh(){
+        startActivity(new Intent(this, ProfileActivity.class));
+        finish();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void getData() {
-        final ProfileServices services = new ProfileServices();
+        final ProfileRepository services = new ProfileRepository();
         nametxt.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -102,13 +108,17 @@ public class ProfileActivity extends AppCompatActivity implements DialogProfile.
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
-    public void applyTexts(String username, String usermail, String userpass) {
-        ProfileServices services = new ProfileServices();
-        services.setData(username, usermail, userpass);
-        //refresh();
+    public void applyTexts(String username) {
+        ProfileRepository services = new ProfileRepository();
+        services.setData(username).observe(this, new Observer() {
+            @Override
+            public void onChanged(Object o) {
+                if(o.equals(true))
+                    refresh();
+                //else print error
+            }
+        });
     }
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -118,15 +128,17 @@ public class ProfileActivity extends AppCompatActivity implements DialogProfile.
             if (requestCode == PICK_IMAGE) {
                 Bitmap bitmap;
                 try {
-                    ProfileServices services = new ProfileServices();
+                    ProfileRepository services = new ProfileRepository();
                     bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(Objects.requireNonNull(data.getData())));
-                    services.putFile(bitmap);
-                    Log.i("chrys", "GET FROM LOCAL.: OK");
-                } catch (FileNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                    Log.i("chrys", "GET FROM LOCAL.: RUIM");
-                }
+                    services.setLocalAsProfilePic(bitmap).observe(this, new Observer() {
+                        @Override
+                        public void onChanged(Object o) {
+                            if(o.equals(true))
+                                refresh();
+                            //else print error
+                        }
+                    });
+                } catch (FileNotFoundException e) { e.printStackTrace(); }
             }
         }
     }

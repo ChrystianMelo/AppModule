@@ -26,8 +26,9 @@
         <activity android:name=".view.ProfileActivity"/>
         <activity android:name=".utils.DialogProfile"/>
         <activity android:name=".utils.FieldVerification"/>
-        <activity android:name=".data.account.SignupServices" />
-        <activity android:name=".data.account.ProfileServices" />
+        <activity android:name=".repositories.account.SignupRepository" />
+        <activity android:name=".repositories.account.ProfileRepository" />
+        <activity android:name=".repositories.account.LoginRepository" />
     </application>
 
 </manifest>

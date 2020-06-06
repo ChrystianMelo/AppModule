@@ -7,10 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
 import com.example.appmodule.utils.FieldVerification;
 import com.example.appmodule.R;
-import com.example.appmodule.data.account.LoginServices;
+import com.example.appmodule.repositories.account.LoginRepository;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -56,21 +57,34 @@ public class LoginActivity extends AppCompatActivity {
                 verify.cleanErrorMessages(passLayout);
                 verify.setErrorMessages(mail,mailLayout,verify.verificationMail(getMail()));
                 verify.setErrorMessages(pass,passLayout,verify.verificationPass(getPass()));
-                if(verify.isVerified(passLayout) && verify.isVerified(mailLayout))
-                    checkData();
+                if(verify.isVerified(passLayout) && verify.isVerified(mailLayout)) {
+                        checkData();
+                }
             }
         });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void checkData(){
-        LoginServices lservices = new LoginServices();
-        if (lservices.signIn(getMail(), getPass()))
-            startActivity(new Intent(this,HomeActivity.class));
+        LoginRepository lservices = new LoginRepository();
+        //startLoadingAnnimation();
+        lservices.signIn(getMail(), getPass()).observe(this, new Observer() {
+            @Override
+            public void onChanged(Object o) {
+                if(o.equals(true))
+                    goHome();
+            }
+        });
 
+    }
+
+    void goHome(){
+        startActivity(new Intent(this, HomeActivity.class));
+        finish();
     }
 
     public void Create(View v){
         startActivity(new Intent(this, SignupActivity.class));
+        finish();
     }
 }
