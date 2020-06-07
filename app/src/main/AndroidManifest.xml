@@ -23,9 +23,9 @@
         <activity android:name=".view.HomeActivity" />
         <activity android:name=".view.LoginActivity" />
         <activity android:name=".view.SignupActivity" />
-        <activity android:name=".view.ProfileActivity"/>
-        <activity android:name=".utils.DialogProfile"/>
-        <activity android:name=".utils.FieldVerification"/>
+        <activity android:name=".view.ProfileActivity" />
+        <activity android:name=".utils.DialogProfile" />
+        <activity android:name=".utils.FieldVerification" />
         <activity android:name=".repositories.account.SignupRepository" />
         <activity android:name=".repositories.account.ProfileRepository" />
         <activity android:name=".repositories.account.LoginRepository" />
