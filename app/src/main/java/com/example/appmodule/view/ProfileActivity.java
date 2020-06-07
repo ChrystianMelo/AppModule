@@ -21,12 +21,14 @@ import androidx.lifecycle.Observer;
 import com.example.appmodule.utils.DialogProfile;
 import com.example.appmodule.R;
 import com.example.appmodule.repositories.account.ProfileRepository;
+import com.example.appmodule.utils.NavBottom;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Objects;
 
-public class ProfileActivity extends AppCompatActivity implements DialogProfile.DialogProfileListener {
+public class ProfileActivity extends NavBottom implements DialogProfile.DialogProfileListener {
 
     TextView nametxt,emailtxt;
     ImageView imgview;

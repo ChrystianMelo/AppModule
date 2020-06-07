@@ -29,6 +29,9 @@
         <activity android:name=".repositories.account.SignupRepository" />
         <activity android:name=".repositories.account.ProfileRepository" />
         <activity android:name=".repositories.account.LoginRepository" />
+        <activity android:name=".view.SearchActivity" />
+        <activity android:name=".utils.NavBottom" />
+        <activity android:name=".view.PostActivity" />
     </application>
 
 </manifest>

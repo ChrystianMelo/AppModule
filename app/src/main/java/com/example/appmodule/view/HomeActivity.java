@@ -8,8 +8,9 @@ import android.os.Bundle;
 
 import com.example.appmodule.utils.FeedAdapter;
 import com.example.appmodule.R;
+import com.example.appmodule.utils.NavBottom;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends NavBottom {
 
     String[] title;
     String[] content;

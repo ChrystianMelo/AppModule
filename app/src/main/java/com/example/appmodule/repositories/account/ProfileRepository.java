@@ -30,6 +30,10 @@ import java.util.Objects;
 public class ProfileRepository extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+    public boolean isUserLogged(){
+        return FirebaseAuth.getInstance().getCurrentUser() != null;
+    }
+
     public String getName() { return user.getDisplayName();}
 
     public String getMail() { return user.getEmail();}

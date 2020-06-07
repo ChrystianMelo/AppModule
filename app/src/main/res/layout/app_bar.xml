@@ -15,13 +15,6 @@
         android:divider="@drawable/empty_tall_divider"
         tools:ignore="UseCompoundDrawables"
         android:layout_marginStart="10dp">
-        <ImageView
-            android:id="@+id/img_appbar_menu"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/ic_menu_24dp"
-            android:tint="@color/colorIcon"
-            android:contentDescription="@string/todo" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,37 +22,5 @@
             android:text="@string/app_name"
             android:textColor="@color/colorIcon"
             android:textSize="20sp" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="60dp"
-        android:layout_marginRight="10dp"
-        android:gravity="right|center_vertical"
-        android:orientation="horizontal"
-        android:showDividers="middle"
-        android:divider="@drawable/empty_tall_divider"
-        android:layout_marginEnd="10dp"
-        tools:ignore="RtlHardcoded">
-        <ImageView
-            android:id="@+id/img_appbar_fav"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/ic_favorite_24dp"
-            android:tint="@color/colorIcon"
-            android:contentDescription="@string/todo" />
-        <ImageView
-            android:id="@+id/img_appbar_search"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/ic_search_24dp"
-            android:tint="@color/colorIcon"
-            android:contentDescription="@string/todo" />
-        <ImageView
-            android:id="@+id/img_appbar_options"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/ic_more_24dp"
-            android:tint="@color/colorIcon"
-            android:contentDescription="@string/todo" />
     </LinearLayout>
 </androidx.appcompat.widget.Toolbar>

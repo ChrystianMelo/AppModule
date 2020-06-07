@@ -7,12 +7,20 @@
     tools:context=".view.ProfileActivity"
     android:background="@color/colorPrimaryDark">
 
-    <include layout="@layout/app_bar" />
+    <include layout="@layout/app_bar"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent"/>
+    <include layout="@layout/bottom_nav"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginBottom="?attr/actionBarSize"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
 

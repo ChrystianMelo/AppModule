@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.HomeActivity"
+    tools:context=".view.PostActivity"
     android:background="@color/colorPrimaryDark">
 
     <include layout="@layout/app_bar"
@@ -22,10 +22,10 @@
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
         android:layout_marginBottom="?attr/actionBarSize">
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_home_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_post_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
