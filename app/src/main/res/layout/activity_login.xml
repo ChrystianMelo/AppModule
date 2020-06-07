@@ -8,109 +8,130 @@
     android:background="@color/colorPrimaryDark">
 
     <LinearLayout
+        android:id="@+id/ll_login_loading"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical"
+        android:alpha="0">
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/loading"
+            />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_login_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:ignore="MissingConstraints,ScrollViewCount"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_marginLeft="@android:dimen/notification_large_icon_height"
-        android:layout_marginRight="@android:dimen/notification_large_icon_width"
-        android:layout_marginStart="@android:dimen/notification_large_icon_height"
-        android:layout_marginEnd="@android:dimen/notification_large_icon_width"
-        >
+        android:alpha="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="MissingConstraints,ScrollViewCount"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginLeft="@android:dimen/notification_large_icon_height"
+            android:layout_marginRight="@android:dimen/notification_large_icon_width"
+            android:layout_marginStart="@android:dimen/notification_large_icon_height"
+            android:layout_marginEnd="@android:dimen/notification_large_icon_width"
+            >
 
-        <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/image"
-            android:layout_width="200dp"
-            android:layout_height="150dp"
-            android:src="@drawable/logo_anim"
-            android:background="@color/colorPrimaryDark"
-            tools:ignore="VectorDrawableCompat"
-            android:contentDescription="@string/todo" />
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                android:src="@drawable/logo"
+                tools:ignore="VectorDrawableCompat"
+                android:contentDescription="@string/todo" />
+
+            <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_login_mailLayout"
+            android:hint="@string/mail"
+            android:textColorHint="@color/design_default_color_on_primary"
+            android:textSize="14sp"
+            app:startIconDrawable="@drawable/ic_user"
+            app:startIconTint="@color/design_default_color_on_primary"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_login_mail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/design_default_color_on_primary"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_login_mailLayout"
-        android:hint="@string/mail"
-        android:textColorHint="@color/design_default_color_on_primary"
-        android:textSize="14sp"
-        app:startIconDrawable="@drawable/ic_user"
-        app:startIconTint="@color/design_default_color_on_primary"
-        android:inputType="textEmailAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:errorEnabled="true"
-        tools:ignore="MissingConstraints">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_login_mail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/design_default_color_on_primary"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id = "@+id/til_login_passLayout"
-        android:hint = "@string/pass"
-        android:textColorHint="@color/design_default_color_on_primary"
-        android:textSize="14sp"
-        app:startIconDrawable="@drawable/ic_pass"
-        app:startIconTint="@color/design_default_color_on_primary"
-        app:endIconMode="password_toggle"
-        app:endIconTint="@color/design_default_color_on_primary"
-        android:inputType="textPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:errorEnabled="true"
-        tools:ignore="MissingConstraints">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiet_login_pass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id = "@+id/til_login_passLayout"
+            android:hint = "@string/pass"
+            android:textColorHint="@color/design_default_color_on_primary"
+            android:textSize="14sp"
+            app:startIconDrawable="@drawable/ic_pass"
+            app:startIconTint="@color/design_default_color_on_primary"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/design_default_color_on_primary"
             android:inputType="textPassword"
-            android:textColor="@color/design_default_color_on_primary"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            tools:ignore="MissingConstraints">
 
-    <Button
-        android:id="@+id/btn_login_next"
-        android:text="@string/log"
-        android:layout_width="@android:dimen/thumbnail_height"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_launcher_button"
-        android:textColor="@color/design_default_color_on_primary"
-        android:textSize="24sp"
-        tools:ignore="MissingConstraints" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_login_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="@color/design_default_color_on_primary"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/txt_login_forgotten"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/forgotPass"
-        android:textColor="@color/design_default_color_on_primary"
-        android:textSize="15sp"
-        tools:ignore="MissingConstraints" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        tools:ignore="MissingConstraints,ScrollViewCount"
-        android:gravity="bottom|center_horizontal"
-        android:orientation="vertical">
+        <Button
+            android:id="@+id/btn_login_next"
+            android:text="@string/log"
+            android:layout_width="@android:dimen/thumbnail_height"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_launcher_button"
+            android:textColor="@color/design_default_color_on_primary"
+            android:textSize="24sp"
+            tools:ignore="MissingConstraints" />
 
         <TextView
-            android:id="@+id/txt_login_create"
+            android:id="@+id/txt_login_forgotten"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/newacc"
-            android:onClick="Create"
+            android:layout_marginTop="10dp"
+            android:text="@string/forgotPass"
             android:textColor="@color/design_default_color_on_primary"
-            android:textSize="15sp" />
-    </LinearLayout>
+            android:textSize="15sp"
+            tools:ignore="MissingConstraints" />
 
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            tools:ignore="MissingConstraints,ScrollViewCount"
+            android:gravity="bottom|center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_login_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/newacc"
+                android:onClick="Create"
+                android:textColor="@color/design_default_color_on_primary"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

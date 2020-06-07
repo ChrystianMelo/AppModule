@@ -12,10 +12,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 
 import com.example.appmodule.utils.DialogProfile;
@@ -33,6 +36,8 @@ public class ProfileActivity extends NavBottom implements DialogProfile.DialogPr
     TextView nametxt,emailtxt;
     ImageView imgview;
     ImageButton infoupd, imgupd, logout;
+    LinearLayout load;
+    ConstraintLayout content;
 
     public static final int PICK_IMAGE = 1;
 
@@ -48,10 +53,25 @@ public class ProfileActivity extends NavBottom implements DialogProfile.DialogPr
         infoupd = findViewById(R.id.imgbtn_profile_update);
         imgupd = findViewById(R.id.imgbtn_profile_updImg);
         logout = findViewById(R.id.imgbtn_profile_logout);
+        content = findViewById(R.id.cl_profile_screen);
+        load = findViewById(R.id.ll_profile_loading);
 
         getData();
         setButtonFunctions();
 
+    }
+
+    public void changeLoadingAnnimation(LinearLayout loading, ConstraintLayout screen) {
+        float loadBak = loading.getAlpha();
+        loading.setAlpha(screen.getAlpha());
+        screen.setAlpha(loadBak);
+    }
+    void openErrorDialog(String msg){
+        final AlertDialog.Builder alert = new AlertDialog.Builder(ProfileActivity.this);
+        alert.setTitle("Error");
+        alert.setPositiveButton("OK",null);
+        alert.setMessage(msg);
+        alert.show();
     }
 
     public void openDialog(){
@@ -97,12 +117,13 @@ public class ProfileActivity extends NavBottom implements DialogProfile.DialogPr
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void getData() {
         final ProfileRepository services = new ProfileRepository();
+        final String[] data = services.getBasicUserInfo();
         nametxt.postDelayed(new Runnable() {
             @Override
             public void run() {
-                new ProfileActivity.DownLoadImageTask(imgview).execute(services.getUri());
-                nametxt.setText(services.getName());
-                emailtxt.setText(services.getMail());
+                new ProfileActivity.DownLoadImageTask(imgview).execute(data[0]);
+                nametxt.setText(data[1]);
+                emailtxt.setText(data[2]);
             }
         }, 1000);
     }
@@ -112,12 +133,16 @@ public class ProfileActivity extends NavBottom implements DialogProfile.DialogPr
     @Override
     public void applyTexts(String username) {
         ProfileRepository services = new ProfileRepository();
+        changeLoadingAnnimation(load,content);
         services.setData(username).observe(this, new Observer() {
             @Override
             public void onChanged(Object o) {
-                if(o.equals(true))
+                if(o.equals(true)) {
                     refresh();
-                //else print error
+                }else{
+                    changeLoadingAnnimation(load,content);
+                    openErrorDialog("You new name is not availble\nTry again later!");
+                }
             }
         });
     }
@@ -130,14 +155,18 @@ public class ProfileActivity extends NavBottom implements DialogProfile.DialogPr
             if (requestCode == PICK_IMAGE) {
                 Bitmap bitmap;
                 try {
+                    changeLoadingAnnimation(load,content);
                     ProfileRepository services = new ProfileRepository();
                     bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(Objects.requireNonNull(data.getData())));
                     services.setLocalAsProfilePic(bitmap).observe(this, new Observer() {
                         @Override
                         public void onChanged(Object o) {
-                            if(o.equals(true))
+                            if(o.equals(true)){
                                 refresh();
-                            //else print error
+                            }else {
+                                changeLoadingAnnimation(load,content);
+                                openErrorDialog("Your change was not possible\nTry again later!");
+                            }
                         }
                     });
                 } catch (FileNotFoundException e) { e.printStackTrace(); }

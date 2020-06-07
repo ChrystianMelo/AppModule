@@ -26,4 +26,5 @@
     <string name="forgotPass">Forgot your pasword?</string>
     <string name="newacc">Create new account</string>
     <string name="logout">LogOut</string>
+    <string name="loading">Loading...</string>
 </resources>

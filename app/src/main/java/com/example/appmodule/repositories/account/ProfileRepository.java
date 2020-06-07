@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -28,23 +29,23 @@ import java.io.ByteArrayOutputStream;
 import java.util.Objects;
 
 public class ProfileRepository extends AppCompatActivity {
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     public boolean isUserLogged(){
         return FirebaseAuth.getInstance().getCurrentUser() != null;
     }
 
-    public String getName() { return user.getDisplayName();}
-
-    public String getMail() { return user.getEmail();}
-
-    public String getUID() { return user.getUid();}
-
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public String getUri() { return Objects.requireNonNull(user.getPhotoUrl()).toString();}
+    public String[] getBasicUserInfo(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String[] data = {Objects.requireNonNull(Objects.requireNonNull(user).getPhotoUrl()).toString(),
+                            user.getDisplayName(),
+                            user.getEmail()};
+        return data;
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public MutableLiveData setData(final String name){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final MutableLiveData updated = new MutableLiveData();
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(name)
@@ -60,11 +61,13 @@ public class ProfileRepository extends AppCompatActivity {
         return updated;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public MutableLiveData setLocalAsProfilePic(Bitmap bitmap){
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final MutableLiveData added = new MutableLiveData();
         FirebaseStorage storage = FirebaseStorage.getInstance();
         final StorageReference storageRef = storage.getReference();
-        final StorageReference mountainsRef = storageRef.child("images/"+getUID()+".jpg");
+        final StorageReference mountainsRef = storageRef.child("images/"+ Objects.requireNonNull(user).getUid()+".jpg");
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);

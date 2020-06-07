@@ -16,13 +16,33 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_width="match_parent" />
 
+    <LinearLayout
+        android:id="@+id/ll_profile_loading"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical"
+        android:alpha="0">
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/loading"
+            />
+    </LinearLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_profile_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
         android:layout_marginBottom="?attr/actionBarSize"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"
+        android:alpha="1">
 
         <TextView
             android:id="@+id/txt_profile_pageTitle"
@@ -46,11 +66,11 @@
             app:layout_constraintTop_toBottomOf="@id/txt_profile_pageTitle"
             android:gravity="center_horizontal|center_vertical"
             tools:ignore="RtlHardcoded">
-            <ImageView
+            <pl.droidsonroids.gif.GifImageView
                 android:id="@+id/img_profile_picture"
                 android:layout_width="160dp"
                 android:layout_height="160dp"
-                android:src="@drawable/logo_anim"
+                android:src="@drawable/loading"
                 android:background="@color/colorPrimaryDark"
                 tools:ignore="VectorDrawableCompat"
                 android:contentDescription="@string/todo" />

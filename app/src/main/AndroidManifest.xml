@@ -32,6 +32,7 @@
         <activity android:name=".view.SearchActivity" />
         <activity android:name=".utils.NavBottom" />
         <activity android:name=".view.PostActivity" />
+        <activity android:name=".repositories.feed.PostRepository" />
     </application>
 
 </manifest>

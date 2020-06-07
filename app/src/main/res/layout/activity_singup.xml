@@ -8,125 +8,149 @@
     android:background="@color/colorPrimaryDark">
 
     <LinearLayout
+        android:id="@+id/ll_signup_loading"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical"
+        android:alpha="0">
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/loading"
+            />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_signup_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:ignore="MissingConstraints,ScrollViewCount"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_marginLeft="@android:dimen/notification_large_icon_height"
-        android:layout_marginRight="@android:dimen/notification_large_icon_width"
-        android:layout_marginStart="@android:dimen/notification_large_icon_height"
-        android:layout_marginEnd="@android:dimen/notification_large_icon_width"
-        >
+        android:alpha="1">
 
-        <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/gif_signup_image"
-            android:layout_width="200dp"
-            android:layout_height="150dp"
-            android:src="@drawable/logo_anim"
-            android:background="@color/colorPrimaryDark"
-            tools:ignore="VectorDrawableCompat"
-            android:contentDescription="@string/todo" />
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_signup_nameLayout"
-            android:hint="@string/name"
-            android:textColorHint="@color/design_default_color_on_primary"
-            android:textSize="14sp"
-            app:startIconDrawable="@drawable/ic_user"
-            app:startIconTint="@color/design_default_color_on_primary"
-            android:inputType="textEmailAddress"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true"
-            tools:ignore="MissingConstraints">
+            android:layout_height="match_parent"
+            tools:ignore="MissingConstraints,ScrollViewCount"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginLeft="@android:dimen/notification_large_icon_height"
+            android:layout_marginRight="@android:dimen/notification_large_icon_width"
+            android:layout_marginStart="@android:dimen/notification_large_icon_height"
+            android:layout_marginEnd="@android:dimen/notification_large_icon_width"
+            >
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tiet_signup_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                android:src="@drawable/logo"
+                android:background="@color/colorPrimaryDark"
+                tools:ignore="VectorDrawableCompat"
+                android:contentDescription="@string/todo" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_signup_nameLayout"
+                android:hint="@string/name"
+                android:textColorHint="@color/design_default_color_on_primary"
+                android:textSize="14sp"
+                app:startIconDrawable="@drawable/ic_user"
+                app:startIconTint="@color/design_default_color_on_primary"
                 android:inputType="textEmailAddress"
-                android:textColor="@color/design_default_color_on_primary"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_signup_mailLayout"
-            android:hint="@string/email"
-            android:textColorHint="@color/design_default_color_on_primary"
-            android:textSize="14sp"
-            app:startIconDrawable="@drawable/ic_mail_24dp"
-            app:startIconTint="@color/design_default_color_on_primary"
-            android:inputType="textEmailAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true"
-            tools:ignore="MissingConstraints">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tiet_signup_mail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_signup_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/design_default_color_on_primary"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_signup_mailLayout"
+                android:hint="@string/email"
+                android:textColorHint="@color/design_default_color_on_primary"
+                android:textSize="14sp"
+                app:startIconDrawable="@drawable/ic_mail_24dp"
+                app:startIconTint="@color/design_default_color_on_primary"
                 android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_signup_mail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/design_default_color_on_primary"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id = "@+id/til_signup_passLayout"
+                android:hint = "Pass"
+                android:textColorHint="@color/design_default_color_on_primary"
+                android:textSize="14sp"
+                app:startIconDrawable="@drawable/ic_pass"
+                app:startIconTint="@color/design_default_color_on_primary"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/design_default_color_on_primary"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_signup_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColor="@color/design_default_color_on_primary"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id = "@+id/til_signup_cpassLayout"
+                android:hint = "Confirm Password"
+                android:textColorHint="@color/design_default_color_on_primary"
+                android:textSize="14sp"
+                app:startIconDrawable="@drawable/ic_pass"
+                app:startIconTint="@color/design_default_color_on_primary"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/design_default_color_on_primary"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_signup_cpass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColor="@color/design_default_color_on_primary"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_signup_next"
+                android:text="Create"
+                android:layout_width="@android:dimen/thumbnail_height"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_launcher_button"
                 android:textColor="@color/design_default_color_on_primary"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id = "@+id/til_signup_passLayout"
-            android:hint = "Pass"
-            android:textColorHint="@color/design_default_color_on_primary"
-            android:textSize="14sp"
-            app:startIconDrawable="@drawable/ic_pass"
-            app:startIconTint="@color/design_default_color_on_primary"
-            app:endIconMode="password_toggle"
-            app:endIconTint="@color/design_default_color_on_primary"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true"
-            tools:ignore="MissingConstraints">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tiet_signup_pass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:textColor="@color/design_default_color_on_primary"/>
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:id = "@+id/til_signup_cpassLayout"
-            android:hint = "Confirm Password"
-            android:textColorHint="@color/design_default_color_on_primary"
-            android:textSize="14sp"
-            app:startIconDrawable="@drawable/ic_pass"
-            app:startIconTint="@color/design_default_color_on_primary"
-            app:endIconMode="password_toggle"
-            app:endIconTint="@color/design_default_color_on_primary"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true"
-            tools:ignore="MissingConstraints">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tiet_signup_cpass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:textColor="@color/design_default_color_on_primary"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/btn_signup_next"
-            android:text="Create"
-            android:layout_width="@android:dimen/thumbnail_height"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_launcher_button"
-            android:textColor="@color/design_default_color_on_primary"
-            android:textSize="24sp"
-            tools:ignore="MissingConstraints" />
-        </LinearLayout>
+                android:textSize="24sp"
+                tools:ignore="MissingConstraints" />
+            </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
