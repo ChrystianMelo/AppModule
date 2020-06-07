@@ -1,8 +1,6 @@
 package com.example.appmodule.view;
 
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appmodule.R;
